@@ -171,41 +171,44 @@ namespace CLIGE
 
         private static void BulletinUpdate()
         {
-            if (bulletins[0].shown)
+            if (bulletins.Count > 0)
             {
-                if (DateTime.Now >= bulletins[0].showTime.AddSeconds(3))
+                if (bulletins[0].shown)
+                {
+                    if (DateTime.Now >= bulletins[0].showTime.AddSeconds(3))
+                    {
+                        bulletins.RemoveAt(0);
+                        ClearBulletin();
+                    }
+                }
+                else if (bulletins[0].textA.Length + bulletins[0].highlight.Length + bulletins[0].textB.Length + 2 < _width)
+                {
+                    bulletins[0].Show();
+
+                    int buffer = (_width - (bulletins[0].textA.Length / 2)) / 2;
+
+                    if (bulletins[0].highlight != "")
+                    {
+                        buffer = (_width - ((bulletins[0].textA.Length + bulletins[0].highlight.Length + bulletins[0].textB.Length + 2) / 2)) / 2;
+                    }
+
+                    Console.SetCursorPosition(buffer, _height + 1);
+                    Console.BackgroundColor = colors[0];
+                    Console.ForegroundColor = colors[15];
+                    Console.Write(bulletins[0].textA);
+
+                    if (bulletins[0].highlight != "")
+                    {
+                        Console.ForegroundColor = colors[bulletins[0].highlightColor];
+                        Console.Write($" {bulletins[0].highlight} ");
+                        Console.ForegroundColor = colors[15];
+                        Console.Write(bulletins[0].textB);
+                    }
+                }
+                else
                 {
                     bulletins.RemoveAt(0);
-                    ClearBulletin();
                 }
-            }
-            else if (bulletins[0].textA.Length + bulletins[0].highlight.Length + bulletins[0].textB.Length + 2 < _width)
-            {
-                bulletins[0].Show();
-
-                int buffer = (_width - (bulletins[0].textA.Length / 2)) / 2;
-
-                if (bulletins[0].highlight != "")
-                {
-                    buffer = (_width - ((bulletins[0].textA.Length + bulletins[0].highlight.Length + bulletins[0].textB.Length + 2) / 2)) / 2;
-                }
-
-                Console.SetCursorPosition(buffer, _height + 1);
-                Console.BackgroundColor = colors[0];
-                Console.ForegroundColor = colors[15];
-                Console.Write(bulletins[0].textA);
-
-                if (bulletins[0].highlight != "")
-                {
-                    Console.ForegroundColor = colors[bulletins[0].highlightColor];
-                    Console.Write($" {bulletins[0].highlight} ");
-                    Console.ForegroundColor = colors[15];
-                    Console.Write(bulletins[0].textB);
-                }
-            }
-            else
-            {
-                bulletins.RemoveAt(0);
             }
         }
 

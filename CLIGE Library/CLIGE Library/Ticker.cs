@@ -45,5 +45,18 @@ namespace CLIGE
 
             return result;
         }
+
+        public bool Check(float delay)
+        {
+            bool result = false;
+
+            if (DateTime.Now >= lastUpdate.AddSeconds(delay))
+            {
+                result = true;
+                lastUpdate = DateTime.Now;
+            }
+
+            return result;
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace CLIGE
         public Sprite sprite;
         public Position position;
         public Vector direction;
-        public Ticker actionDelay;
+        public Ticker movementDelay;
 
         public GameObject(int layer, Position position, string texture, int backgroundColor, int foregroundColor)
         {
@@ -24,7 +24,7 @@ namespace CLIGE
             this.position = position;
             sprite = new Sprite(texture, backgroundColor, foregroundColor);
             direction = new Vector(0, 0, 0);
-            actionDelay = new Ticker();
+            movementDelay = new Ticker();
             objects[layer].Add(this);
         }
 
@@ -36,7 +36,7 @@ namespace CLIGE
             this.position = position;
             sprite = new Sprite(texture, height, width, backgroundColor, foregroundColor);
             direction = new Vector(0, 0, 0);
-            actionDelay = new Ticker();
+            movementDelay = new Ticker();
             objects[layer].Add(this);
         }
 
@@ -48,7 +48,7 @@ namespace CLIGE
             this.position = position;
             sprite = new Sprite(texture, height, width, backgroundColor, foregroundColor);
             direction = new Vector(0, 0, 0);
-            actionDelay = new Ticker();
+            movementDelay = new Ticker();
             objects[layer].Add(this);
         }
 
@@ -57,7 +57,12 @@ namespace CLIGE
             sprite = source.sprite;
             position = source.position;
             direction = source.direction;
-            actionDelay = new Ticker(source.actionDelay);
+            movementDelay = new Ticker(source.movementDelay);
+        }
+
+        public void ChangeDirection(Vector direction)
+        {
+            this.direction = direction;
         }
 
         public void ChangeDirection(int direction)
@@ -80,7 +85,7 @@ namespace CLIGE
         {
             bool canMove = false;
 
-            if (actionDelay.Check() && position.r + direction.r >= 0 && position.r + height + direction.r < grid.Length && position.c + direction.c >= 0 && position.c + width + direction.c < grid[0].Length)
+            if (position.r + direction.r >= 0 && position.r + height + direction.r < grid.Length && position.c + direction.c >= 0 && position.c + width + direction.c < grid[0].Length)
             {
                 canMove = true;
                 position.Update(direction);
@@ -101,7 +106,6 @@ namespace CLIGE
 
         public void Delete()
         {
-            Window.Clear(position);
             objects[layer].Remove(this);
         }
     }

@@ -14,8 +14,8 @@ namespace CLIGE
 
         public static void Init(int gameHeight, int gameWidth, int layers)
         {
-            if (gameHeight < 200) { gameHeight = 200; }
-            if (gameWidth < 200) { gameWidth = 200; }
+            if (gameHeight < Console.WindowHeight - 2) { gameHeight = Console.WindowHeight - 2; }
+            if (gameWidth < (Console.WindowWidth + 1) / 2) { gameWidth = (Console.WindowWidth + 1) / 2; }
 
             InitGrid(gameHeight, gameWidth);
             Window.Init(false);
@@ -51,7 +51,7 @@ namespace CLIGE
             {
                 foreach (GameObject gameObject in objects[l])
                 {
-                    if (gameObject.direction.v != 0)
+                    if (gameObject.movementDelay.Check() && gameObject.direction.v != 0)
                     {
                         gameObject.Move();
                     }
