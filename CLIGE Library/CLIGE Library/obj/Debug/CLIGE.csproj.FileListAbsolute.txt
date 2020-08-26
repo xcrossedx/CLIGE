@@ -1,0 +1,5 @@
+C:\Users\sebsk\source\repos\CLIGE Library\CLIGE Library\bin\Debug\CLIGE Library.dll
+C:\Users\sebsk\source\repos\CLIGE Library\CLIGE Library\bin\Debug\CLIGE Library.pdb
+C:\Users\sebsk\source\repos\CLIGE Library\CLIGE Library\obj\Debug\CLIGE.csprojAssemblyReference.cache
+C:\Users\sebsk\source\repos\CLIGE Library\CLIGE Library\obj\Debug\CLIGE Library.dll
+C:\Users\sebsk\source\repos\CLIGE Library\CLIGE Library\obj\Debug\CLIGE Library.pdb
